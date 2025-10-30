@@ -1,10 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://5bvl2d7i7cdi"]
+[gd_scene load_steps=19 format=3 uid="uid://5bvl2d7i7cdi"]
 
 [ext_resource type="Script" uid="uid://dc1lu38185dod" path="res://node_3d.gd" id="1_emu5t"]
 [ext_resource type="ArrayMesh" uid="uid://osn62i35fong" path="res://project_files/assets/models/Sketchfab_Scene_handSmooth_001_lambert1_0.res" id="2_noarx"]
+[ext_resource type="Script" uid="uid://b17ls5wfo184d" path="res://xr_origin_3d.gd" id="2_r3fl7"]
+[ext_resource type="Script" uid="uid://dcmakcalqcv6a" path="res://teleport.gd" id="3_a0tk4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_lvy56"]
 size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_noarx"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_noarx"]
 
@@ -34,6 +38,7 @@ size = Vector3(0.1, 0.1, 0.1)
 script = ExtResource("1_emu5t")
 
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
+script = ExtResource("2_r3fl7")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
 
@@ -55,6 +60,7 @@ mesh = ExtResource("2_noarx")
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
+script = ExtResource("3_a0tk4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController"]
 mesh = SubResource("BoxMesh_lvy56")
@@ -62,6 +68,14 @@ mesh = SubResource("BoxMesh_lvy56")
 [node name="HandRightRoot" type="Node3D" parent="XROrigin3D/RightController"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController/HandRightRoot"]
+
+[node name="TeleportRay" type="RayCast3D" parent="XROrigin3D/RightController"]
+target_position = Vector3(0, 0, -10)
+
+[node name="TeleportMaker" type="MeshInstance3D" parent="XROrigin3D/RightController"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 3.4484043, 0)
+visible = false
+mesh = SubResource("CylinderMesh_noarx")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -120,7 +134,7 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 shape = SubResource("SphereShape3D_tereu")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.280342, 11.811092, -12.609119)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.280342, 11.811092, -12.870314)
 shadow_enabled = true
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="Level"]
