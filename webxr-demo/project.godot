@@ -22,4 +22,5 @@ renderer/rendering_method.mobile="gl_compatibility"
 
 [xr]
 
+openxr/view_configuration=0
 shaders/enabled=true
